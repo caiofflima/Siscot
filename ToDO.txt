@@ -1,0 +1,11 @@
+**Não serao utilizadas todas as tabelas descritas no modelo de banco, pois o projeto teria uma build inicial mais realista
+com o tempo e complexidade do projeto.
+
+**Usaremos a estruta
+
+	models
+		entidade1
+		entidade2
+	services
+	controlers
+	etc.
