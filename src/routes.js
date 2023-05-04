@@ -1,4 +1,16 @@
-import express from "express";
-const routes = express.Router();
+const { Router } = require('express');
+const pacienteRoutes = require('./routes/pacienteRoutes');
+const usuarioRoutes = require('./routes/usuarioRoutes');
+const historicoRoutes = require('./routes/historicoRoutes');
+const acompanhamentoRoutes = require('./routes/acompanhamentoRoutes');
+const agendaRoutes = require('./routes/agendaRoutes');
 
-export default routes;
+const routes = Router();
+
+routes.use('/pacientes', pacienteRoutes);
+routes.use('/usuarios', usuarioRoutes);
+routes.use('/historicos', historicoRoutes);
+routes.use('/acompanhamentos', acompanhamentoRoutes);
+routes.use('/agendas', agendaRoutes);
+
+module.exports = routes;
