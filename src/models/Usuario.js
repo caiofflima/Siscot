@@ -7,7 +7,7 @@ const { Model, DataTypes } = require('sequelize');
     nome: DataTypes.STRING,
     email: DataTypes.STRING,
     senha: DataTypes.STRING,
-    funcao: DataTypes.ENUM('ADMIN', 'MEDICO', 'ENFERMEIRO'),
+    funcao: DataTypes.ENUM('ADMIN', 'ASSISTENTE SOCIAL', 'SECRETARIO'),
   }, {
     sequelize,
     modelName: 'Usuario',

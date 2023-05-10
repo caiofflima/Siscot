@@ -1,9 +1,8 @@
 const db = require('../db');
-const { Acompanhamento } = require('../models/Acompanhamento')(db);
 
 class AcompanhamentoRepository {
   async findAll() {
-    return Acompanhamento.findAll({ include: ['pacienteData', 'profissionalData'] });
+    return Acompanhamento.findAll({ include: [{ model: Paciente, as: 'pacienteData' }, { model: Usuario, as: 'profissionalData' }]});
   }
 
   async findById(id) {
@@ -23,4 +22,4 @@ class AcompanhamentoRepository {
   }
 }
 
-module.exports = AcompanhamentoRepository;
+module.exports = new AcompanhamentoRepository;

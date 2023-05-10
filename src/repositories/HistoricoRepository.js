@@ -1,5 +1,5 @@
 const db = require('../db');
-const { Historico } = require('../models/Historico')(db);
+
 
 class HistoricoRepository {
   async findAll() {
@@ -23,4 +23,4 @@ class HistoricoRepository {
   }
 }
 
-module.exports = HistoricoRepository;
+module.exports = new HistoricoRepository;

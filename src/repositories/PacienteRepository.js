@@ -1,5 +1,4 @@
 const db = require('../db');
-const PacienteModel = require('../models/Paciente')(db);
 
 class PacienteRepository {
   async findAll() {

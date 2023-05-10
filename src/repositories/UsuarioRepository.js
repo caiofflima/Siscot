@@ -1,5 +1,5 @@
 const db = require('../db');
-const { Usuario } = require('../models/Usuario')(db);
+
 
 class UsuarioRepository {
   async findAll() {
@@ -23,4 +23,4 @@ class UsuarioRepository {
   }
 }
 
-module.exports = UsuarioRepository;
+module.exports = new UsuarioRepository;

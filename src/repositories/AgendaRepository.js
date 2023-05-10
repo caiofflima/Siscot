@@ -1,5 +1,5 @@
 const db = require('../db');
-const { Agenda } = require('../models/Agenda')(db);
+
 
 class AgendaRepository {
   async findAll() {
@@ -23,4 +23,4 @@ class AgendaRepository {
   }
 }
 
-module.exports = AgendaRepository;
+module.exports = new AgendaRepository;

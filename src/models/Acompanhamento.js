@@ -5,8 +5,8 @@ class Acompanhamento extends Model {}
 module.exports = (sequelize) => {
   Acompanhamento.init(
     {
-      paciente: DataTypes.INTEGER,
-      profissional: DataTypes.INTEGER,
+      pacienteId: DataTypes.INTEGER,
+      profissionalId: DataTypes.INTEGER,
       data: DataTypes.DATE,
       anotacoes: DataTypes.STRING,
     },
@@ -18,11 +18,11 @@ module.exports = (sequelize) => {
 
   Acompanhamento.associate = (models) => {
     Acompanhamento.belongsTo(models.Paciente, {
-      foreignKey: 'paciente',
+      foreignKey: 'pacienteId',
       as: 'pacienteData',
     });
     Acompanhamento.belongsTo(models.Usuario, {
-      foreignKey: 'profissional',
+      foreignKey: 'profissionalId',
       as: 'profissionalData',
     });
   };
