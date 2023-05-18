@@ -25,7 +25,10 @@ module.exports = (sequelize) => {
       foreignKey: 'profissionalId',
       as: 'profissionalData',
     });
+    models.Paciente.hasMany(models.Acompanhamento, {foreignKey: 'pacienteId', onDelete: 'CASCADE'})
+    models.Usuario.hasMany(models.Acompanhamento, {foreignKey: 'profissionalId', onDelete: 'CASCADE'})
   };
+
 
 
   return Acompanhamento;

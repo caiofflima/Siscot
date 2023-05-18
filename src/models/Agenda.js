@@ -15,7 +15,9 @@ module.exports = (sequelize) => {
   Agenda.associate = (models) => {
     Agenda.belongsTo(models.Acompanhamento, {
       foreignKey: 'acompanhamento',
+      as: 'acompanhamentoData',
     });
+    models.Acompanhamento.hasOne(models.Agenda, {foreignKey: 'acompanhamento', onDelete: 'CASCADE'})
   };
 
 

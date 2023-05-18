@@ -1,4 +1,4 @@
-const db = require('../db');
+const { Usuario } = require('../db');
 
 
 class UsuarioRepository {

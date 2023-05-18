@@ -1,7 +1,6 @@
 const { Model, DataTypes } = require('sequelize');
 
-
-  class Historico extends Model {}
+class Historico extends Model {}
   module.exports = (sequelize) => {
   Historico.init({
     paciente: DataTypes.INTEGER,
@@ -20,8 +19,8 @@ const { Model, DataTypes } = require('sequelize');
       foreignKey: 'paciente',
       as: 'pacienteData',
     });
+    models.Paciente.hasMany(Historico, {foreignKey: 'paciente', onDelete: 'CASCADE'});
   };
-
 
   return Historico;
 };

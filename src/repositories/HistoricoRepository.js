@@ -1,9 +1,9 @@
-const db = require('../db');
+const { Historico, Paciente } = require('../db');
 
 
 class HistoricoRepository {
   async findAll() {
-    return Historico.findAll({ include: ['pacienteData'] });
+    return Historico.findAll({ include: { model: Paciente, as: 'pacienteData' } });
   }
 
   async findById(id) {

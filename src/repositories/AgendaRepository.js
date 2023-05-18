@@ -1,9 +1,14 @@
-const db = require('../db');
-
+const { Agenda, Acompanhamento } = require('../db');
 
 class AgendaRepository {
   async findAll() {
-    return Agenda.findAll({ include: ['acompanhamentoData'] });
+    return Agenda.findAll({ 
+      include: [
+        { 
+          model: Acompanhamento, 
+          as: 'acompanhamentoData'}
+      ] 
+    });
   }
 
   async findById(id) {

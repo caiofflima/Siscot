@@ -10,6 +10,7 @@ module.exports = (sequelize) => {
     genero: DataTypes.STRING,
     data_nascimento: DataTypes.DATE,
     endereco: DataTypes.STRING,
+    numero: DataTypes.INTEGER,
     telefone: DataTypes.STRING,
     email: DataTypes.STRING,
     informacoes: DataTypes.STRING,

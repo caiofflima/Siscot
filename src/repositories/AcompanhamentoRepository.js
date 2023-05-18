@@ -1,4 +1,4 @@
-const db = require('../db');
+const { Acompanhamento, Paciente, Usuario } = require('../db');
 
 class AcompanhamentoRepository {
   async findAll() {
