@@ -1,18 +1,19 @@
-const { Model, DataTypes } = require('sequelize');
+const { Model, DataTypes } = require("sequelize");
 
-
-  class Usuario extends Model {}
-  module.exports = (sequelize) => {
-  Usuario.init({
-    nome: DataTypes.STRING,
-    email: DataTypes.STRING,
-    senha: DataTypes.STRING,
-    funcao: DataTypes.ENUM('ADMIN', 'ASSISTENTE SOCIAL', 'SECRETARIO'),
-  }, {
-    sequelize,
-    modelName: 'Usuario',
-  });
-
+class Usuario extends Model {}
+module.exports = (sequelize) => {
+  Usuario.init(
+    {
+      name: DataTypes.STRING,
+      email: DataTypes.STRING,
+      password: DataTypes.STRING,
+      role: DataTypes.ENUM("ADMIN", "ASSISTENTE SOCIAL", "SECRETARIO"),
+    },
+    {
+      sequelize,
+      modelName: "Usuario",
+    }
+  );
 
   return Usuario;
 };
