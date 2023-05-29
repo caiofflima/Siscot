@@ -1,7 +1,10 @@
 const { Router } = require('express');
 const UsuarioController = require('../controllers/UsuarioController');
+const roleCheckMiddleware = require('../middlewares/roleCheck');
 
 const router = Router();
+
+router.use(roleCheckMiddleware(['ADMIN', 'SECRETARIO', 'ASSISTENTE SOCIAL']));
 
 router.get('/', UsuarioController.index);
 router.get('/:id', UsuarioController.show);
