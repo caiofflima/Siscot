@@ -1,6 +1,7 @@
+const UsuarioRepository = require('../repositories/UsuarioRepository');
 const UsuarioService = require('../services/UsuarioService');
 const usuarioService = new UsuarioService();
-
+const { Usuario } = require('../db');
 class UsuarioController {
   async index(req, res) {
     const usuarios = await usuarioService.findAll();
@@ -14,8 +15,16 @@ class UsuarioController {
   }
 
   async store(req, res) {
-    const usuario = await usuarioService.create(req.body);
-    res.status(201).json(usuario);
+    const { email } = req.body;
+    let userExists = await Usuario.findAll({where: {email}});
+    
+    if(userExists != null){
+      res.status(409).send('Email já cadastrado')
+    }else{
+      const usuario = await usuarioService.create(req.body);
+       res.status(201).json(userExists);
+    }
+    
   }
 
   async update(req, res) {
