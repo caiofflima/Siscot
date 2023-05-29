@@ -10,6 +10,10 @@ class UsuarioRepository {
     return Usuario.findByPk(id);
   }
 
+  async findOne(email) {
+    return Usuario.findOne({ where: { email } });
+  }
+
   async create(usuario) {
     return Usuario.create(usuario);
   }

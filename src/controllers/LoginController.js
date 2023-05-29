@@ -13,7 +13,8 @@ module.exports = {
   async login(req, res) {
     const { email, password } = req.body;
 
-    const usuario = await Usuario.findOne({ where: { email } });
+    const usuario = await usuarioService.findOne(email);
+
 
     if (!usuario || !(await usuario.checkPassword(password))) {
       return res.status(401).json({ message: 'Email ou senha inválidos' });

@@ -9,6 +9,10 @@ class UsuarioService {
     return usuarioRepository.findById(id);
   }
 
+  async findOne(email) {
+    return usuarioRepository.findOne(email);
+  }
+
   async create(usuario) {
     return usuarioRepository.create(usuario);
   }
