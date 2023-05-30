@@ -1,4 +1,3 @@
-const UsuarioRepository = require('../repositories/UsuarioRepository');
 const UsuarioService = require('../services/UsuarioService');
 const usuarioService = new UsuarioService();
 const { Usuario } = require('../db');
