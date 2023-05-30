@@ -2,6 +2,8 @@ const UsuarioRepository = require('../repositories/UsuarioRepository');
 const UsuarioService = require('../services/UsuarioService');
 const usuarioService = new UsuarioService();
 const { Usuario } = require('../db');
+const bcrypt = require('bcryptjs');
+
 class UsuarioController {
   async index(req, res) {
     const usuarios = await usuarioService.findAll();
@@ -15,22 +17,50 @@ class UsuarioController {
   }
 
   async store(req, res) {
-    const { email } = req.body;
-    let userExists = await Usuario.findAll({where: {email}});
-    
-    if(userExists != null){
-      res.status(409).send('Email já cadastrado')
+    const { name, email, password, role } = req.body;
+    let userExists = await Usuario.findOne({where: {email}});
+
+    if(userExists != null && userExists.length != 0){
+      res.status(409).send('Email já cadastrado');
     }else{
-      const usuario = await usuarioService.create(req.body);
-       res.status(201).json(userExists);
+      let password_crypt = await bcrypt.hashSync(password, 10);
+      const usuario = await Usuario.create( { name, email, password: password_crypt, role } );
+
+      res.status(201).json(usuario);
     }
     
   }
 
   async update(req, res) {
-    const { id } = req.params;
-    await usuarioService.update(id, req.body);
-    res.sendStatus(204);
+    
+    try{
+      const { id } = req.params;
+      const { name, email, password, role } = req.body;
+
+      let data = await usuarioService.findById(id);
+
+      if(data === null)
+        return res.status(400).json("Usuario não encontrado");
+      
+      if(data.password != password){
+        let password_crypt = await bcrypt.hashSync(password, 10);
+        await Usuario.update( { name, email, password: password_crypt, role }, { where: { id: Number(id) }} );
+
+        data = await usuarioService.findById(id)
+
+        return res.status(200).json(data);
+      }
+
+      await Usuario.update({ name, email, password, role }, { where: { id: Number(id) } });
+
+      data = await usuarioService.findById(id);
+          
+      return res.status(200).json(data)
+      
+    }catch(error){
+      return res.status(500).json(error.message)
+    }
+
   }
 
   async delete(req, res) {
