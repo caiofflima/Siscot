@@ -27,14 +27,14 @@ class LoginController {
                 id: user.id
             }
     
-            const token = jwt.sign(payload, "Random string", { expiresIn: "1d" })
+            const token = jwt.sign(payload, "secret", { expiresIn: "1d" })
     
             return res.status(200).send({
                 success: true,
                 message: "Logado com sucesso!",
-                token: token
-            })
-        })
+                token: "Bearer " + token
+            });
+        });
     }
    
     // protected(){
