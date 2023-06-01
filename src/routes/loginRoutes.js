@@ -1,8 +1,15 @@
-const express = require('express');
-const router = express.Router();
+const { Router } = require('express');
+const jwt = require('jsonwebtoken');
+const passport = require('passport');
+const LoginController = require('../controllers/LoginController');
 
-router.get('/', (req, res, next) => {
-    res.render('login', { message: null} );
+const router = Router();
+
+router.post('/', LoginController.login);
+
+router.get('/', passport.authenticate('jwt', { session: false }), (req, res) => {
+    return res.status(200).send(req.user.profile);
 });
+
 
 module.exports = router;
