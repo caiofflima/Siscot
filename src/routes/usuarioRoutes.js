@@ -4,7 +4,7 @@ const roleCheckMiddleware = require('../middlewares/roleCheck');
 
 const router = Router();
 
-router.use(roleCheckMiddleware(['ADMIN', 'SECRETARIO', 'ASSISTENTE SOCIAL']));
+router.use(roleCheckMiddleware(['ADMIN']));
 
 router.get('/', UsuarioController.index);
 router.get('/:id', UsuarioController.show);

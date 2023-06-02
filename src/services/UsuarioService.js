@@ -14,6 +14,9 @@ class UsuarioService {
   }
 
   async create(usuario) {
+    if (await this.findOne(usuario.email)) {
+      return null;
+    }
     return usuarioRepository.create(usuario);
   }
 
