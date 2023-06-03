@@ -1,7 +1,7 @@
 {
     "client": "Thunder Client",
     "collectionName": "SISCOT 02/06/2023",
-    "dateExported": "2023-06-02T13:07:28.143Z",
+    "dateExported": "2023-06-03T16:18:46.250Z",
     "version": "1.1",
     "folders": [],
     "requests": [
@@ -128,8 +128,13 @@
             "method": "GET",
             "sortNum": 30000,
             "created": "2023-06-02T12:22:30.638Z",
-            "modified": "2023-06-02T13:01:03.441Z",
-            "headers": [],
+            "modified": "2023-06-02T13:17:46.739Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjg1NzEwNjExLCJleHAiOjE2ODU3OTcwMTF9.0pTTM0vrnLt5JwhzrG1gztyef52XIENIOGVtRfeSqXk"
+                }
+            ],
             "params": [],
             "tests": []
         },
@@ -170,7 +175,7 @@
             "method": "GET",
             "sortNum": 36250,
             "created": "2023-06-02T12:32:26.081Z",
-            "modified": "2023-06-02T13:07:08.191Z",
+            "modified": "2023-06-02T13:15:38.734Z",
             "headers": [],
             "params": [],
             "tests": []
@@ -395,6 +400,20 @@
             "sortNum": 80000,
             "created": "2023-06-02T12:32:12.382Z",
             "modified": "2023-06-02T12:32:12.382Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "d72e78ff-2a34-4e61-b9de-e6498c874e70",
+            "colId": "9ff3e97a-c8cc-4fcf-aaf0-af50c1f1c45e",
+            "containerId": "",
+            "name": "LOGOUT",
+            "url": "localhost:3000/logout",
+            "method": "POST",
+            "sortNum": 90000,
+            "created": "2023-06-03T16:18:38.134Z",
+            "modified": "2023-06-03T16:18:38.134Z",
             "headers": [],
             "params": [],
             "tests": []

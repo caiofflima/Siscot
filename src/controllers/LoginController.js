@@ -20,7 +20,7 @@ module.exports = {
       return res.status(401).json({ message: 'Email ou senha inválidos' });
     }
 
-    token = usuario.generateToken();
+    const token = usuario.generateToken();
 
     res.cookie('token', token, { httpOnly: true, secure: false, maxAge: 86400 });
 
@@ -28,6 +28,7 @@ module.exports = {
   },
 
   async logout(req, res) {
+
     res.clearCookie('token');
 
     return res.json({ message: 'Logout realizado com sucesso' });
