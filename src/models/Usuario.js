@@ -26,6 +26,10 @@ module.exports = (sequelize) => {
         const hashedPassword = await bcrypt.hash(usuario.password, 10);
         usuario.password = hashedPassword;
       },
+      beforeUpdate: async (usuario) => {
+        const hashedPassword = await bcrypt.hash(usuario.password, 10);
+        usuario.password = hashedPassword;
+      }
     },
   });
 
