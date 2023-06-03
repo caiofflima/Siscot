@@ -11,6 +11,7 @@ const routes = Router();
 
 routes.post('/registro', loginController.registro);
 routes.post('/login', loginController.login);
+routes.post('/logout', loginController.logout);
 
 routes.use(authMiddleware);
 
