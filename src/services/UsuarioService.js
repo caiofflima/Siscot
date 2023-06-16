@@ -21,6 +21,7 @@ class UsuarioService {
   }
 
   async update(id, usuario) {
+    
     return usuarioRepository.update(id, usuario);
   }
 
