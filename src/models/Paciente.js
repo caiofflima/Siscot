@@ -7,14 +7,14 @@ module.exports = (sequelize) => {
 
   Paciente.init(
     {
-      name: DataTypes.STRING,
-      gender: DataTypes.ENUM("MASCULINO", "FEMININO", "OUTRO"),
-      date_birth: DataTypes.DATE,
-      address: DataTypes.STRING,
-      number: DataTypes.INTEGER,
-      phone: DataTypes.STRING,
+      nome: DataTypes.STRING,
+      genero: DataTypes.ENUM("MASCULINO", "FEMININO", "OUTRO"),
+      data_nascimento: DataTypes.DATE,
+      endereco: DataTypes.STRING,
+      numero: DataTypes.INTEGER,
+      telefone: DataTypes.STRING,
       email: DataTypes.STRING,
-      info: DataTypes.STRING,
+      informacoes: DataTypes.STRING,
     },
     {
       sequelize,

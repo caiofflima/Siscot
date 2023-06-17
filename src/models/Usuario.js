@@ -3,9 +3,8 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 class Usuario extends Model {
-  async checkPassword(password) {
-    const response = await bcrypt.compare(password, this.password);
-    console.log("aq", response);
+  async checkPassword(senha) {
+    const response = await bcrypt.compare(senha, this.senha);
     return response;
   }
 
@@ -17,22 +16,22 @@ class Usuario extends Model {
 module.exports = (sequelize) => {
   Usuario.init(
     {
-      name: DataTypes.STRING,
+      nome: DataTypes.STRING,
       email: DataTypes.STRING,
-      password: DataTypes.STRING,
-      role: DataTypes.ENUM("ADMIN", "ASSISTENTE SOCIAL", "SECRETARIO"),
+      senha: DataTypes.STRING,
+      cargo: DataTypes.ENUM("ADMIN", "ASSISTENTE SOCIAL", "SECRETARIO"),
     },
     {
       sequelize,
       modelName: "Usuario",
       hooks: {
         beforeCreate: async (usuario) => {
-          const hashedPassword = await bcrypt.hash(usuario.password, 10);
-          usuario.password = hashedPassword;
+          const hashedPassword = await bcrypt.hash(usuario.senha, 10);
+          usuario.senha = hashedPassword;
         },
         beforeUpdate: async (usuario) => {
-          const hashedPassword = await bcrypt.hash(usuario.password, 10);
-          usuario.password = hashedPassword;
+          const hashedPassword = await bcrypt.hash(usuario.senha, 10);
+          usuario.senha = hashedPassword;
         },
       },
     }
