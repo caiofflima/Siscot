@@ -1,12 +1,28 @@
-const { Acompanhamento, Paciente, Usuario } = require('../db');
+const { Acompanhamento, Paciente, Usuario } = require("../db");
+const { Op } = require("sequelize");
 
 class AcompanhamentoRepository {
   async findAll() {
-    return Acompanhamento.findAll({ include: [{ model: Paciente, as: 'pacienteData' }, { model: Usuario, as: 'profissionalData' }]});
+    return Acompanhamento.findAll({
+      where: {
+        deleted: { [Op.not]: true },
+      },
+      include: [
+        { model: Paciente, as: "pacienteData" },
+        { model: Usuario, as: "profissionalData" },
+      ],
+    });
   }
 
   async findById(id) {
-    return Acompanhamento.findByPk(id, { include: ['pacienteData', 'profissionalData'] });
+    return Acompanhamento.findByPk({
+      where: { id },
+
+      deleted: {
+        [Op.not]: true,
+      },
+      include: ["pacienteData", "profissionalData"],
+    });
   }
 
   async create(acompanhamento) {
@@ -18,8 +34,8 @@ class AcompanhamentoRepository {
   }
 
   async delete(id) {
-    return Acompanhamento.destroy({ where: { id } });
+    return Acompanhamento.update({ deleted: true }, { where: { id } });
   }
 }
 
-module.exports = new AcompanhamentoRepository;
+module.exports = new AcompanhamentoRepository();

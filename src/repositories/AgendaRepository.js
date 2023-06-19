@@ -1,18 +1,28 @@
-const { Agenda, Acompanhamento } = require('../db');
+const { Agenda, Acompanhamento } = require("../db");
+const { Op } = require("sequelize");
 
 class AgendaRepository {
   async findAll() {
-    return Agenda.findAll({ 
-      include: [
-        { 
-          model: Acompanhamento, 
-          as: 'acompanhamentoData'}
-      ] 
+    return Agenda.findAll({
+      where: {
+        deleted: { [Op.not]: true },
+      },
+      include: {
+        model: Acompanhamento,
+        as: "acompanhamentoData",
+      },
     });
   }
 
   async findById(id) {
-    return Agenda.findByPk(id, { include: ['acompanhamentoData'] });
+    return Agenda.findByPk({
+      where: { id },
+
+      deleted: {
+        [Op.not]: true,
+      },
+      include: ["acompanhamentoData"],
+    });
   }
 
   async create(agenda) {
@@ -24,8 +34,8 @@ class AgendaRepository {
   }
 
   async delete(id) {
-    return Agenda.destroy({ where: { id } });
+    return Agenda.update({ deleted: true }, { where: { id } });
   }
 }
 
-module.exports = new AgendaRepository;
+module.exports = new AgendaRepository();

@@ -15,6 +15,10 @@ module.exports = (sequelize) => {
       telefone: DataTypes.STRING,
       email: DataTypes.STRING,
       informacoes: DataTypes.STRING,
+      deleted: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+      },
     },
     {
       sequelize,

@@ -1,13 +1,25 @@
-const { Historico, Paciente } = require('../db');
-
+const { Historico, Paciente } = require("../db");
+const { Op } = require("sequelize");
 
 class HistoricoRepository {
   async findAll() {
-    return Historico.findAll({ include: { model: Paciente, as: 'pacienteData' } });
+    return Historico.findAll({
+      where: {
+        deleted: { [Op.not]: true },
+      },
+      include: { model: Paciente, as: "pacienteData" },
+    });
   }
 
   async findById(id) {
-    return Historico.findByPk(id, { include: ['pacienteData'] });
+    return Historico.findByPk({
+      where: { id },
+
+      deleted: {
+        [Op.not]: true,
+      },
+      include: ["pacienteData"],
+    });
   }
 
   async create(historico) {
@@ -19,8 +31,8 @@ class HistoricoRepository {
   }
 
   async delete(id) {
-    return Historico.destroy({ where: { id } });
+    return Historico.update({ deleted: true }, { where: { id } });
   }
 }
 
-module.exports = new HistoricoRepository;
+module.exports = new HistoricoRepository();

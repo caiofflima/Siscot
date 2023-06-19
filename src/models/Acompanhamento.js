@@ -1,4 +1,4 @@
-const { Model, DataTypes } = require('sequelize');
+const { Model, DataTypes } = require("sequelize");
 
 class Acompanhamento extends Model {}
 
@@ -9,27 +9,35 @@ module.exports = (sequelize) => {
       profissionalId: DataTypes.INTEGER,
       data: DataTypes.DATE,
       anotacoes: DataTypes.STRING,
+      deleted: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+      },
     },
     {
       sequelize,
-      modelName: 'Acompanhamento',
+      modelName: "Acompanhamento",
     }
   );
 
   Acompanhamento.associate = (models) => {
     Acompanhamento.belongsTo(models.Paciente, {
-      foreignKey: 'pacienteId',
-      as: 'pacienteData',
+      foreignKey: "pacienteId",
+      as: "pacienteData",
     });
     Acompanhamento.belongsTo(models.Usuario, {
-      foreignKey: 'profissionalId',
-      as: 'profissionalData',
+      foreignKey: "profissionalId",
+      as: "profissionalData",
     });
-    models.Paciente.hasMany(models.Acompanhamento, {foreignKey: 'pacienteId', onDelete: 'CASCADE'})
-    models.Usuario.hasMany(models.Acompanhamento, {foreignKey: 'profissionalId', onDelete: 'CASCADE'})
+    models.Paciente.hasMany(models.Acompanhamento, {
+      foreignKey: "pacienteId",
+      onDelete: "CASCADE",
+    });
+    models.Usuario.hasMany(models.Acompanhamento, {
+      foreignKey: "profissionalId",
+      onDelete: "CASCADE",
+    });
   };
-
-
 
   return Acompanhamento;
 };

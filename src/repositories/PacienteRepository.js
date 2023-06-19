@@ -1,12 +1,23 @@
-const { Paciente } = require('../db');
+const { Paciente } = require("../db");
+const { Op } = require("sequelize");
 
 class PacienteRepository {
   async findAll() {
-    return Paciente.findAll();
+    return Paciente.findAll({
+      where: {
+        deleted: { [Op.not]: true },
+      },
+    });
   }
 
   async findById(id) {
-    return Paciente.findByPk(id);
+    return Paciente.findByPk({
+      where: { id },
+
+      deleted: {
+        [Op.not]: true,
+      },
+    });
   }
 
   async create(paciente) {
@@ -18,7 +29,7 @@ class PacienteRepository {
   }
 
   async delete(id) {
-    return Paciente.destroy({ where: { id } });
+    return Paciente.update({ deleted: true }, { where: { id } });
   }
 }
 

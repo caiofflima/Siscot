@@ -20,6 +20,10 @@ module.exports = (sequelize) => {
       email: DataTypes.STRING,
       senha: DataTypes.STRING,
       cargo: DataTypes.ENUM("ADMIN", "ASSISTENTE SOCIAL", "SECRETARIO"),
+      deleted: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+      },
     },
     {
       sequelize,
