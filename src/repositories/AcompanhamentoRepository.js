@@ -15,7 +15,7 @@ class AcompanhamentoRepository {
   }
 
   async findById(id) {
-    return Acompanhamento.findByPk({
+    return Acompanhamento.findOne({
       where: { id },
 
       deleted: {

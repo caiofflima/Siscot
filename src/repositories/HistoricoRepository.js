@@ -12,7 +12,7 @@ class HistoricoRepository {
   }
 
   async findById(id) {
-    return Historico.findByPk({
+    return Historico.findOne({
       where: { id },
 
       deleted: {

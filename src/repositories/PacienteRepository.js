@@ -11,7 +11,7 @@ class PacienteRepository {
   }
 
   async findById(id) {
-    return Paciente.findByPk({
+    return Paciente.findOne({
       where: { id },
 
       deleted: {

@@ -15,7 +15,7 @@ class AgendaRepository {
   }
 
   async findById(id) {
-    return Agenda.findByPk({
+    return Agenda.findOne({
       where: { id },
 
       deleted: {
