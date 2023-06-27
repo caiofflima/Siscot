@@ -5,10 +5,10 @@ class Acompanhamento extends Model {}
 module.exports = (sequelize) => {
   Acompanhamento.init(
     {
+      title: DataTypes.STRING,
+      start: DataTypes.DATE,
       pacienteId: DataTypes.INTEGER,
       profissionalId: DataTypes.INTEGER,
-      data: DataTypes.DATE,
-      anotacoes: DataTypes.STRING,
       deleted: {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
@@ -41,3 +41,6 @@ module.exports = (sequelize) => {
 
   return Acompanhamento;
 };
+
+
+
