@@ -1,14 +1,13 @@
 const jwt = require('jsonwebtoken');
 const { Usuario } = require('../db');
 
-module.exports = async (req, res, next) => {
-  const authHeader = req.headers.authorization;
+async function authenticateToken(req, res, next) {
+  console.log(req.cookies.a);
+  const token = req.cookies.token;
 
-  if (!authHeader) {
+  if (!token) {
     return res.status(401).json({ message: 'Token não fornecido' });
   }
-
-  const [, token] = authHeader.split(' ');
 
   try {
     const payload = jwt.verify(token, 'secret');
@@ -26,3 +25,14 @@ module.exports = async (req, res, next) => {
     return res.status(401).json({ message: 'Token inválido' });
   }
 };
+
+function authorizeRole(role) {
+  return (req, res, next) => {
+    if (req.usuario.cargo !== role) {
+      return res.status(403).json({ message: 'Usuário não autorizado' });
+    }
+    next();
+  };
+}
+
+module.exports = { authenticateToken, authorizeRole };

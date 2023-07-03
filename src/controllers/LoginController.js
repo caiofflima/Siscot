@@ -37,7 +37,6 @@ module.exports = {
 
   async logout(req, res) {
     res.clearCookie("token");
-
     return res.json({ message: "Logout realizado com sucesso" });
   },
 };

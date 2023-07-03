@@ -1,11 +1,16 @@
-var cors = require("cors");
+const cors = require("cors");
 const express = require("express");
 const { sequelize } = require("./db");
 const routes = require("./routes");
+const cookieParser = require("cookie-parser");
 
 const app = express();
 
-app.use(cors());
+app.use(cookieParser());
+app.use(cors({
+  origin: 'http://localhost:4200',
+  credentials: true,
+}));
 app.use(express.json());
 app.use(routes);
 
