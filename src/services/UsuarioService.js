@@ -1,3 +1,5 @@
+const bcrypt = require('bcrypt');
+
 const usuarioRepository = require('../repositories/UsuarioRepository');
 
 class UsuarioService {
@@ -8,6 +10,7 @@ class UsuarioService {
   async findById(id) {
     return usuarioRepository.findById(id);
   }
+  
 
   async findOne(email) {
     return usuarioRepository.findOne(email);
@@ -21,7 +24,13 @@ class UsuarioService {
   }
 
   async update(id, usuario) {
-    
+    if (usuario.senha == "Senha Criptografada") {
+      const user = await usuarioRepository.findById(id);
+      usuario.senha = user.senha;
+    } else {
+      const hashedPassword = await bcrypt.hash(usuario.senha, 10);
+      usuario.senha = hashedPassword;
+    }
     return usuarioRepository.update(id, usuario);
   }
 
