@@ -1,10 +1,8 @@
-const { Model } = require("sequelize");
+const { Model, DataTypes } = require("sequelize");
 
 class Paciente extends Model {}
 
 module.exports = (sequelize) => {
-  const DataTypes = sequelize.Sequelize;
-
   Paciente.init(
     {
       nome: DataTypes.STRING,
@@ -26,12 +24,13 @@ module.exports = (sequelize) => {
     }
   );
 
-  // Paciente.associate = (models) => {
-  //   Paciente.hasMany(models.Acompanhamento, {
-  //     foreignKey: 'pacienteId', // you should replace 'pacienteId' with the correct foreign key
-  //     as: 'pacienteData',
-  //   });
-  // };
+  Paciente.associate = (models) => {
+    Paciente.belongsToMany(models.Acompanhamento, {
+      through: "AcompanhamentoPaciente",
+      foreignKey: "pacienteId",
+      as: "acompanhamentos",
+    });
+  };
 
   return Paciente;
 };
