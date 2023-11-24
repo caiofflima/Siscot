@@ -8,7 +8,7 @@ class AcompanhamentoRepository {
         deleted: { [Op.not]: true },
       },
       include: [
-        { model: Paciente, as: "pacienteData" },
+        { model: Paciente, as: "pacientes" },
         { model: Usuario, as: "profissionalData" },
       ],
     });

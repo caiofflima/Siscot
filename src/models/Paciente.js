@@ -26,7 +26,7 @@ module.exports = (sequelize) => {
 
   Paciente.associate = (models) => {
     Paciente.belongsToMany(models.Acompanhamento, {
-      through: "AcompanhamentoPaciente",
+      through: "AcompanhamentoPaciente", // ou apenas omita essa linha se quiser que o Sequelize crie automaticamente
       foreignKey: "pacienteId",
       as: "acompanhamentos",
     });

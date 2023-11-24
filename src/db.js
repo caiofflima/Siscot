@@ -1,5 +1,6 @@
-const { Sequelize } = require('sequelize');
-const config = require('./config/database');  
+// db.js
+const { Sequelize } = require("sequelize");
+const config = require("./config/database");
 
 const sequelize = new Sequelize(
   config.database,
@@ -17,15 +18,15 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
 // Initialize models
-db.Paciente = require('./models/Paciente')(sequelize);
-db.Usuario = require('./models/Usuario')(sequelize);
-db.Historico = require('./models/Historico')(sequelize);
-db.Acompanhamento = require('./models/Acompanhamento')(sequelize);
-db.Agenda = require('./models/Agenda')(sequelize);
+db.Paciente = require("./models/Paciente")(sequelize);
+db.Usuario = require("./models/Usuario")(sequelize);
+db.Historico = require("./models/Historico")(sequelize);
+db.Acompanhamento = require("./models/Acompanhamento")(sequelize);
+db.Agenda = require("./models/Agenda")(sequelize);
 
 // Associate models
-for (let model of Object.values(db)) {
-  if (typeof model.associate === 'function') {
+for (const model of Object.values(db)) {
+  if (model.associate) {
     model.associate(db);
   }
 }

@@ -1,9 +1,17 @@
-const AcompanhamentoService = require('../services/AcompanhamentoService');
+const AcompanhamentoService = require("../services/AcompanhamentoService");
 const acompanhamentoService = new AcompanhamentoService();
+const Paciente = require("../models/Paciente");
 
 class AcompanhamentoController {
   async index(req, res) {
-    const acompanhamentos = await acompanhamentoService.findAll();
+    const acompanhamentos = await acompanhamentoService.findAll({
+      include: [
+        {
+          model: Paciente, // Certifique-se de importar o modelo Paciente no início do arquivo
+          as: "pacientes", // O mesmo alias que você definiu na associação
+        },
+      ],
+    });
     res.json(acompanhamentos);
   }
 
