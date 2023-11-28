@@ -1,4 +1,4 @@
-const AcompanhamentoService = require('../services/AcompanhamentoService');
+const AcompanhamentoService = require("../services/AcompanhamentoService");
 const acompanhamentoService = new AcompanhamentoService();
 
 class AcompanhamentoController {

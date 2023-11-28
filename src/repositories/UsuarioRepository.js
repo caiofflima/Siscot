@@ -11,7 +11,6 @@ class UsuarioRepository {
   }
 
   async findById(id) {
-    console.log(id);
     return Usuario.findOne({
       where: { id },
 
